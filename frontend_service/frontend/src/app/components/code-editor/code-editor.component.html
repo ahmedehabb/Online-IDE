@@ -1,0 +1,18 @@
+<div class="buttons-container">
+  <button mat-raised-button (click)="save()" disabled="{{ isFileSaved }}">
+    Save
+  </button>
+  <button mat-raised-button (click)="compile()" disabled="{{ !isFileSaved }}">
+    Compile
+  </button>
+</div>
+
+<div style="height: 500px">
+  <ngx-monaco-editor
+    #editor
+    style="height: 100%"
+    [options]="editorOptions"
+    [(ngModel)]="code"
+    (ngModelChange)="handleCodeChange()"
+  ></ngx-monaco-editor>
+</div>

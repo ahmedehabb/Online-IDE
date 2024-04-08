@@ -1,0 +1,43 @@
+<app-navbar></app-navbar>
+<mat-sidenav-container class="parent">
+  <mat-sidenav #sidenav class="my-sidenav" mode="side" opened>
+    <div class="back-button">
+      <button mat-raised-button color="primary" (click)="handleBack()">
+        <mat-icon>arrow_back</mat-icon> Back
+      </button>
+    </div>
+    <h1 class="project-name">
+      {{ fileService.currentProject?.name }}
+    </h1>
+    <div *ngFor="let file of fileService.files">
+      <div
+        class="file"
+        id="dropdown-id"
+        (contextmenu)="handleFileRightClick($event, file)"
+        (click)="handleFileClick($event, file)"
+        [class.file-selected]="fileService.selectedFile === file"
+        [class.file-current]="fileService.currentFile === file"
+      >
+        <div *ngIf="showFileDropdownMap.get(file)" class="dropdown-menu">
+          <ul>
+            <li (click)="openModalToRename()">Rename</li>
+            <li (click)="deleteFile()">Delete</li>
+          </ul>
+        </div>
+        <mat-icon class="custom-icon">description</mat-icon>{{ file.fileName }}
+      </div>
+    </div>
+
+    <div class="buttons-container">
+      <app-file-dialog #fileDialog />
+      <button mat-raised-button color="primary" (click)="openModalToShare()">
+        Share Project
+      </button>
+    </div>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <app-code-editor />
+    <app-terminal />
+  </mat-sidenav-content>
+</mat-sidenav-container>

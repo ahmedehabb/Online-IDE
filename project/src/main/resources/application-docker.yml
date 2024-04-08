@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: project-service
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://projectservicedb:5432/project-db?user=admin&password=test
+    username: ${POSTGRES_USER:admin}
+    password: ${POSTGRES_PASSWORD:test}
+    name: ${POSTGRES_DB:project-db}
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop 
+      dialect: org.hibernate.dialect.PostgreSQLDialect
+      #jdbc.lob.non_contextual_creation: true
+    #generate-ddl: true
+server:
+  port: 8081
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://service-registry-service:8761/eureka

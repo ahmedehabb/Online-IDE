@@ -1,0 +1,56 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <h1>Project Management</h1>
+  <div class="button-container">
+    <button mat-raised-button color="primary" class="add-project-button" (click)="addProject()">
+      Add Project
+    </button>
+
+    <span class="error-message" *ngIf="errorMessage.length > 0">{{
+      errorMessage
+    }}</span>
+  </div>
+
+  <span class="empty-message" *ngIf="projects.length === 0">There are no projects yet</span>
+
+  <table *ngIf="projects.length > 0" class="styled-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Users</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let project of projects" (mouseover)="onCellHover(true, project)"
+        (mouseout)="onCellHover(false, project)">
+        <td>{{ project.id }}</td>
+        <td>
+          <input #projectName [ngClass]="
+              project.hasErrors
+                ? 'error-project'
+                : project.isEditable
+                ? 'editable'
+                : 'not-editable'
+            " [(ngModel)]="project.name" (blur)="renameProject(project, projectName)" />
+        </td>
+        <td (click)="onClickUsers()" style="cursor: pointer">
+          <div *ngIf="showUserIds">
+            <ul class="userIds">
+              <li *ngFor="let userId of project.userIds">{{ userId }}</li>
+            </ul>
+          </div>
+          <div *ngIf="!showUserIds">
+            {{ project.userIds.length }}
+          </div>
+        </td>
+        <td>
+          <span class="open-link" (click)="openProject(project)">Open</span>
+          |
+          <span class="delete-link" (click)="deleteProject(project.id)">Delete</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

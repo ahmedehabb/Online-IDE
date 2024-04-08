@@ -1,0 +1,14 @@
+<mat-toolbar>
+  <span>Online IDE</span>
+  <span class="example-spacer"></span>
+
+  <div style="margin-right: 20px;"><mat-slide-toggle (change)="toggleTheme()"></mat-slide-toggle></div>
+  <div class="dropdown-container">
+    <mat-icon [matMenuTriggerFor]="menu" class="my-icon"
+      >account_circle</mat-icon
+    >
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="this.authService.logout()">Logout</button>
+    </mat-menu>
+  </div>
+</mat-toolbar>

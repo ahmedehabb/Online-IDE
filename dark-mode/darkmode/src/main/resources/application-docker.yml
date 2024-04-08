@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: dark-mode
+server:
+  port: 8083
+eureka:
+  client:
+    service-url:
+      defaultZone: http://service-registry-service:8761/eureka/

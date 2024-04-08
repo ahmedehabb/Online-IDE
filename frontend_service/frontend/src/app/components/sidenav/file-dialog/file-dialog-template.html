@@ -1,0 +1,23 @@
+<div>
+  <h1 mat-dialog-title class="dialog-title-container">
+    <span class="dialog-title-text">{{ fileService.isRenaming ? 'Rename File' : fileService.isSharing ?
+      'Share Project' : 'New File' }}</span>
+    <button mat-dialog-close mat-icon-button class="dialog-close-button">
+      <mat-icon>close</mat-icon>
+    </button>
+  </h1>
+  <mat-divider></mat-divider>
+  <div class="dialog-content">
+    <input #newFile #code class="input-field"
+      placeholder="{{ fileService.isRenaming ? 'Enter new file name' : fileService.isSharing ? 'Enter username' : 'Enter file name' }}"
+      (keyup.enter)="performAction(newFile.value, code.value)" [(ngModel)]="selectedFileName" />
+  </div>
+  <mat-divider></mat-divider>
+  <div mat-dialog-actions style="display: flex; justify-content: flex-end">
+    <button mat-raised-button color="primary" mat-dialog-close cdkFocusInitial
+      (click)="performAction(newFile.value, code.value)">
+      {{ fileService.isRenaming ? 'Rename': fileService.isSharing ? 'Share' :
+      'Create' }}
+    </button>
+  </div>
+</div>

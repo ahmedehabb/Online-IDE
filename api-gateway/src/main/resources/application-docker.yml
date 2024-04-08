@@ -1,0 +1,52 @@
+spring:
+  cloud:
+    gateway:
+      mvc:
+        routes:
+          - id: project-service
+            uri: lb://project-service
+            predicates:
+              - Path=/api/project/**
+          - id: compiler-service
+            uri: lb://compiler-service
+            predicates:
+              - Path=/api/compile/**
+          - id: dark-mode
+            uri: lb://dark-mode
+            predicates:
+              - Path=/api/dark-mode/**
+          - id: service-registry
+            uri: http://service-registry-service:8761
+            predicates:
+              - Path=/eureka/dashboard
+            filters:
+              - SetPath=/
+          - id: service-registry-static
+            uri: http://service-registry-service:8761
+            predicates:
+              - Path=/eureka/**
+  security:
+    oauth2:
+      client:
+        provider:
+          gitlab:
+            authorization-uri: https://gitlab.lrz.de/oauth/authorize
+            token-uri: https://gitlab.lrz.de/oauth/token
+            user-info-uri: https://gitlab.lrz.de/api/v4/user
+            user-name-attribute: username
+        registration:
+          gitlab:
+            provider: gitlab
+            redirect-uri: http://34.125.30.158:8080/login/oauth2/code/gitlab
+            authorization-grant-type: authorization_code
+            client-id: 8910d32ed7ac4b90e31fb6285b6da16daf77a6e8841fe1a62ffff46d121617aa
+            client-secret: gloas-cb0e46bc2cd592844b616ba1e5cafaf1eac1eedc553203ea0d19b7426a2b5462
+  application:
+    name: api-gateway
+
+eureka:
+  client:
+    service-url:
+        defaultZone: http://service-registry-service:8761/eureka
+cors:
+  origins: http://34.125.30.158:8084

@@ -1,0 +1,104 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  max-width: 70%;
+  margin: 0 auto;
+}
+
+.add-project-button {
+  margin-top: 20px;
+  align-self: flex-start;
+}
+
+.empty-message {
+  padding-top: 100px;
+  margin: auto;
+  color: #4c4646;
+  font-size: 25px;
+  font-weight: 400;
+}
+
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.styled-table thead tr {
+  background-color: #1078c3;
+  color: #ffffff;
+  text-align: center;
+}
+
+.styled-table th,
+.styled-table td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #dddddd;
+  text-align: center;
+}
+
+.editable {
+  cursor: pointer;
+  padding: 5px 10px;
+  background: none;
+  border: 1px solid rgb(134, 133, 133);
+  border-radius: 5px;
+  font-size: 15px;
+  text-align: center;
+}
+
+.not-editable {
+  background: none;
+  padding: 5px 10px;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  font-size: 15px;
+  text-align: center;
+}
+
+.open-link,
+.delete-link {
+  padding: 5px 10px;
+  transition: color 0.3s;
+}
+
+.open-link:hover {
+  color: #0056b3;
+  cursor: pointer;
+}
+
+.delete-link:hover {
+  color: #d11a2a;
+  cursor: pointer;
+}
+
+.userIds {
+  list-style-type: none;
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 100px;
+}
+
+.error-message {
+  padding-top: 18px;
+  color: red;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.error-project {
+  cursor: pointer;
+  padding: 5px 10px;
+  background: none;
+  border: 1px solid rgb(255, 0, 0);
+  border-radius: 5px;
+  font-size: 15px;
+  text-align: center;
+}

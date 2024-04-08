@@ -1,0 +1,97 @@
+version: "3.7"
+services:
+  darkmode-service:
+    image: gitlab.lrz.de:5005/ase23-seehamer-see/onlineide/dark-mode/darkmode
+    container_name: dark-mode-service
+    restart: on-failure
+    ports: 
+      - 8083:8083
+    depends_on:
+      - api-gateway-service
+      - service-registry-service
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - springapipostgres-net
+
+  projectservicedb:
+    image: "postgres:latest"
+    container_name: projectservicedb
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: test
+      POSTGRES_DB: project-db
+    networks:
+      - springapipostgres-net
+
+  project-service:
+    image: gitlab.lrz.de:5005/ase23-seehamer-see/onlineide/project
+    container_name: project-service
+    restart: on-failure
+    ports:
+      - 8081:8081
+    depends_on:
+      - api-gateway-service
+      - service-registry-service
+    environment:
+      - JDBC_URL=jdbc:postgresql://projectservicedb:5432/project-db?user=admin&password=test
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - springapipostgres-net
+
+  compiler-service:
+    image: gitlab.lrz.de:5005/ase23-seehamer-see/onlineide/compiler
+    container_name: compiler-service
+    restart: on-failure
+    ports:
+      - 8082:8082
+    depends_on:
+      - api-gateway-service
+      - service-registry-service
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - springapipostgres-net
+
+  frontend-service:
+    image: gitlab.lrz.de:5005/ase23-seehamer-see/onlineide/frontend_service
+    container_name: frontend_service
+    restart: on-failure
+    ports:
+      - 8084:8084
+    depends_on:
+      - api-gateway-service
+      - service-registry-service
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - springapipostgres-net
+
+  api-gateway-service:
+    image: gitlab.lrz.de:5005/ase23-seehamer-see/onlineide/api-gateway
+    container_name: api-gateway-service
+    restart: on-failure
+    ports:
+      - 8080:8080
+    depends_on:
+      - service-registry-service
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - springapipostgres-net
+
+  service-registry-service:
+    image: gitlab.lrz.de:5005/ase23-seehamer-see/onlineide/service-registry
+    container_name: service-registry-service
+    restart: on-failure
+    ports:
+      - 8761:8761
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - springapipostgres-net
+
+networks:
+  springapipostgres-net:

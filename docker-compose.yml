@@ -1,0 +1,111 @@
+version: "3.7"
+services:
+  dark-mode-service:
+    container_name: dark-mode-service
+    build:
+      context: ./dark-mode/darkmode
+      dockerfile: Dockerfile
+    restart: on-failure
+    ports:
+      - 8083:8083
+    depends_on:
+      - api-gateway-service
+      - service-registry-service
+    networks:
+      - springapipostgres-net
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+
+  projectservicedb:
+    image: "postgres:latest"
+    container_name: projectservicedb
+    ports:
+    - "5432:5432"
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: test
+      POSTGRES_DB: project-db
+    networks:
+      - springapipostgres-net
+
+  project-service:
+    container_name: project-service
+    build:
+      context: ./project
+      dockerfile: Dockerfile
+    restart: on-failure
+    image: project-service:latest
+    ports:
+      - 8081:8081
+    depends_on:
+      - api-gateway-service
+      - service-registry-service
+    networks:
+      - springapipostgres-net
+    environment:
+      - JDBC_URL=jdbc:postgresql://projectservicedb:5432/project-db?user=admin&password=test
+      - SPRING_PROFILES_ACTIVE=docker
+
+  compiler-service:
+    container_name: compiler-service
+    build:
+      context: ./compiler
+      dockerfile: Dockerfile
+    restart: on-failure
+    ports:
+      - 8082:8082
+    depends_on:
+      - api-gateway-service
+      - service-registry-service
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - springapipostgres-net
+
+  frontend-service:
+    container_name: frontend_service
+    build:
+      context: ./frontend_service
+      dockerfile: Dockerfile
+    restart: on-failure
+    ports:
+      - 8084:8084
+    depends_on:
+      - api-gateway-service
+      - service-registry-service
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - springapipostgres-net
+
+  api-gateway-service:
+    container_name: api-gateway-service
+    build:
+      context: ./api-gateway
+      dockerfile: Dockerfile
+    restart: on-failure
+    ports:
+      - 8080:8080
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - service-registry-service
+    networks:
+      - springapipostgres-net
+    
+
+  service-registry-service:
+    container_name: service-registry-service
+    build:
+      context: ./service-registry
+      dockerfile: Dockerfile
+    restart: on-failure
+    ports:
+      - 8761:8761
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - springapipostgres-net
+  
+networks:
+  springapipostgres-net:

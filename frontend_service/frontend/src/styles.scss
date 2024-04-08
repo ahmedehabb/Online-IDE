@@ -1,0 +1,43 @@
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+}
+
+$light-bg-color: #ffffff;
+$dark-bg-color: #1e1e1e;
+
+$light-bg-table-color: #f3f3f3;
+$dark-bg-table-color: #333333;
+
+$light-text-color: #333333;
+$dark-text-color: #ffffff;
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: var(--bg-color);
+}
+
+h1,
+td,
+input {
+  color: var(--color);
+}
+
+tbody tr:hover {
+  background-color: var(--bg-table-color);
+}
+
+:root {
+  --bg-color: #{$light-bg-color};
+  --color: #{$light-text-color};
+  --bg-table-color: #{$light-bg-table-color};
+}
+
+:root[theme="dark"] {
+  --bg-color: #{$dark-bg-color};
+  --color: #{$dark-text-color};
+  --bg-table-color: #{$dark-bg-table-color};
+}

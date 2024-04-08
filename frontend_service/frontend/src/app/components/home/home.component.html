@@ -1,0 +1,11 @@
+<div class="container">
+  <h1>Welcome to the OnlineIDE</h1>
+  <p>A project for Advanced Topics of Software Engineering (TUM)</p>
+  <button *ngIf="!authenticatedNow" (click)="authService.login()" mat-raised-button color="primary">
+    Login with GitLab LRZ
+  </button>
+
+  <button *ngIf="authenticatedNow" (click)="authService.logout()" mat-raised-button color="primary">
+    Logout
+  </button>
+</div>

@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: compiler-service
+server:
+  port: 8082
+eureka:
+  client:
+    service-url:
+      defaultZone: http://service-registry-service:8761/eureka/
