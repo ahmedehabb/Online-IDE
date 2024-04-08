@@ -1,6 +1,24 @@
 # OnlineIDE
+# Project Specification – OnlineIDE
+
+## Motivation
+
+An integrated development environment (IDE) provides programmers typically with at least a source code editor, project file management, and capabilities to compile and/or interpret source code. Most modern IDEs furthermore have build automation tools, a debugger, and version control systems integrated. IDEs can be language-specific or support multiple languages. Intentions behind using an IDE can be for example:
+• Reduction of the necessary configuration, e.g. link and install multiple development utilities, by using one cohesive unit
+• Graphical user interface (GUI) which can simplify and sometimes accelerate the development process
+• Tighter integration of code with productivity tools, e.g. continuous parsing of code providing instant feedback or GUI builders
+
+However, when using an IDE you will often still need certain compilers or interpreters installed to work with it properly, and you may need to update your IDE regularly in order to stay up-to-date. Therefore, it can be desirable to even reduce this effort with a web-based IDE, where necessary tools, programming languages or features come prepackaged and always at the newest version.
+
+## OnlineIDE
+You and your team will implement your own web-based IDE (OnlineIDE), where users can write source code in a web application, organize source code files, and compile the code and display output (e.g. error messages) from the compiler operated on a remote server (see the big picture in Figure 1). The users do not need to install any programs or files or configure their development machines to start new projects. Find some inspiration at https://ide.cs50.io/, https://aws.amazon.com/cloud9/, https://www.gitpod.io/ or https://theia-ide. org/.
+
+# The full Specification
+
+[Project Specification - OnlineIDE.pdf](https://github.com/ahmedehabb/Online-IDE/files/14911575/Project.Specification.-.OnlineIDE.pdf)
 
 
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ## Add your files
 
