@@ -1,5 +1,7 @@
 # OnlineIDE - Project for Advanced Topics of Software Engineering
 
+<img width="1008" alt="image" src="https://github.com/ahmedehabb/Online-IDE/assets/58532236/ccfb1a08-6f6f-462b-9b2c-4e83e230f288">
+
 
 # Project Specification – OnlineIDE
 ## Motivation
