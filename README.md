@@ -1,6 +1,7 @@
-# OnlineIDE
-# Project Specification – OnlineIDE
+# OnlineIDE - Project for Advanced Topics of Software Engineering
 
+
+# Project Specification – OnlineIDE
 ## Motivation
 
 An integrated development environment (IDE) provides programmers typically with at least a source code editor, project file management, and capabilities to compile and/or interpret source code. Most modern IDEs furthermore have build automation tools, a debugger, and version control systems integrated. IDEs can be language-specific or support multiple languages. Intentions behind using an IDE can be for example:
